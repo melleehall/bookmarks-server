@@ -8,10 +8,6 @@ const bodyParser = express.json()
 
 bookmarksRouter
     .route('/bookmarks')
-    .get((req, res) => {
-        res 
-            .json(store.bookmarks)
-    })
     .post(bodyParser, (req, res) => {
         const { title, url, description, rating } = req.body;
 
@@ -54,46 +50,26 @@ bookmarksRouter
 
 bookmarksRouter
     .route('/bookmarks/:id')
-    .get((req, res) => {
+    .delete((req, res) => {
         const { id } = req.params
 
-        if (!id) {
-            logger.error(`ID parameter required and not received.`)
+        const index = store.bookmarks.findIndex(b => 
+            b.id === id
+        )
+
+        if (index === -1) {
+            logger.error(`Bookmark with id ${id} not found.`)
             return res  
                 .status(404)
-                .send('Invalid request due to missing id parameter.')
+                .send('Bookmark not found')
         }
 
-        const bookmark = store.bookmarks.find(b => b.id == id)
+        store.bookmarks.splice(index, 1)
 
-        if (!bookmark) {
-            logger.error(`Bookmark with id ${id} not found.`)
-            return res
-                .status(404)
-                .send('Bookmark Not Found')
-        }
-            res.json(bookmark)
-        })
-        .delete((req, res) => {
-            const { id } = req.params
-
-            const index = store.bookmarks.findIndex(b => 
-                b.id === id
-            )
-
-            if (index === -1) {
-                logger.error(`Bookmark with id ${id} not found.`)
-                return res  
-                    .status(404)
-                    .send('Bookmark not found')
-            }
-
-            store.bookmarks.splice(index, 1)
-
-            logger.info(`Bookmark with id ${id} deleted.`)
-            res
-                .status(204)
-                .end()
+        logger.info(`Bookmark with id ${id} deleted.`)
+        res
+            .status(204)
+            .end()
     })
 
 module.exports = bookmarksRouter

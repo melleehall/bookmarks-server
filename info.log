@@ -16,3 +16,8 @@
 {"message":"Bookmark with id eb0319ea-672a-4b77-a04c-211bfba130c2 deleted.","level":"info"}
 {"message":"Bookmark with id 0b241bcd-243e-4560-880a-f3f58bed74d not found.","level":"error"}
 {"message":"Bookmark with id 6bf9b22d-deda-4e62-b0ba-671b87ed21b0 deleted.","level":"info"}
+{"message":"Bookmark with id 1 not found.","level":"error"}
+{"message":"Bookmark with id 2 not found.","level":"error"}
+{"message":"Bookmark with id 2 not found.","level":"error"}
+{"message":"Bookmark with id 2 not found.","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
