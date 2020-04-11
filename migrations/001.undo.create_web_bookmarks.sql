@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS web_bookmarks;
+DROP TYPE IF EXISTS stars;
